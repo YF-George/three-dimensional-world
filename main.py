@@ -1,7 +1,7 @@
 import pygame
 import sys, time
 
-rect_1 = pygame.Rect( 100, 100, 100, 100 )
+rect_1 = pygame.Rect( 100, 100 , 100, 100 )
 rect_2 = pygame.Rect( 200, 250, 20, 20 )
 def _Game():
   pygame.init()
@@ -27,10 +27,11 @@ def _Game():
       print("Collision")
     #pygame.draw.circle(screen, (0, 0, 255), (mouse_x, mouse_y), 10)
     pygame.draw.line( screen, red, (rect_1.x, 0), (rect_1.x, 500) )
+    pygame.draw.line( screen, red, (0,rect_1.y), (500,rect_1.y) )
     pygame.display.flip()
 
     clock.tick(60)
-
+  
 def collision( ra, rb ):
   ax1 = ra.x
   ay1 = ra.y
@@ -47,6 +48,12 @@ def collision( ra, rb ):
     return True
   
   if bx2 >= ax2 and bx1 <= ax2 and by2 >= ay1 and by1 <= ay2:
+    print("Second x axis", time.time())
+    return True
+  if bx2 >= ax1 and bx1 <= ax1 and by2 >= ay1 and by1 <= ay2:
+    print("Second x axis", time.time())
+    return True
+  if by2 >= ay2 and by1 <= ay2 :
     print("Second x axis", time.time())
     return True
 
