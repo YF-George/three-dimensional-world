@@ -1,7 +1,7 @@
 import pygame
 import sys, time
 
-rect_1 = pygame.Rect( 100, 100, 20, 20 )
+rect_1 = pygame.Rect( 100, 100, 100, 100 )
 rect_2 = pygame.Rect( 200, 250, 20, 20 )
 def _Game():
   pygame.init()
@@ -24,8 +24,9 @@ def _Game():
     #rect_2.move( mouse_x, mouse_y )
     rect_2.update( (mouse_x-10, mouse_y-10), (20, 20) )
     if collision( rect_1, rect_2 ):
-      print("Collsion")
+      print("Collision")
     #pygame.draw.circle(screen, (0, 0, 255), (mouse_x, mouse_y), 10)
+    pygame.draw.line( screen, red, (rect_1.x, 0), (rect_1.x, 500) )
     pygame.display.flip()
 
     clock.tick(60)
@@ -41,8 +42,13 @@ def collision( ra, rb ):
   bx2 = bx1 + rb.width
   by2 = by1 + rb.height
   
-  if ax2 >= bx1 and ay2 >= by1 and bx2 >= ax1 and by2 >= ay1:
-    print("Oh ya", time.time())
+  if bx2 >= ax1 and bx1 <= ax1 and by2 >= ay1 and by1 <= ay2:
+    print("Touch", time.time())
+    return True
+  
+  if bx2 >= ax2 and bx1 <= ax2 and by2 >= ay1 and by1 <= ay2:
+    print("Second x axis", time.time())
+    return True
 
 def Boxie(scr, color, my_box):
   pygame.draw.rect(scr, color, my_box, 1)
